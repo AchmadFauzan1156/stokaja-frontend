@@ -42,6 +42,7 @@ export default function RegisterPage() {
       <Button
         text="Sign Up"
         className="mt-77.5 leading-none"
+        disable={true}
       />
 
     </div>

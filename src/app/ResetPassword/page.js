@@ -33,6 +33,7 @@ export default function RegisterPage() {
       <Button
         text="Get Link"
         className="mt-98 leading-none"
+        disabled={true}
       />
 
     </div>

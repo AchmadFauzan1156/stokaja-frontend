@@ -23,15 +23,16 @@ export default function RegisterPage() {
       <h1 className="pb-16 text-[43.593px] leading-none font-normal text-[#6E822E]">
         Sign Up
       </h1>
-
-      <TextBox placeholder="E-Mail" type="email" />
-      <TextBox placeholder="Nama Lengkap" type="text" />
-      <TextBox placeholder="Password" type="password" />
-      <TextBox placeholder="Konfirmasi Password" type="password" />
-
+      <div className="flex w-full max-w-md flex-col gap-4">
+        <TextBox placeholder="E-Mail" type="email" />
+        <TextBox placeholder="Nama Lengkap" type="text" />
+        <TextBox placeholder="Password" type="password" />
+        <TextBox placeholder="Konfirmasi Password" type="password" />
+      </div>
       <Button
         text="Sign Up"
         className="mt-36 leading-none"
+        disabled={true}
       />
 
     </div>

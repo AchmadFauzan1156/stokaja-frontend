@@ -11,3 +11,12 @@ h1 {
 .font-signika {
   font-family: var(--font-signika);
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
