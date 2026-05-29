@@ -11,7 +11,8 @@ export default function CheckoutCard({
   onCheckout,
 }) {
 
-  const hasSelected = total > 0;
+  const hasSelected =
+    total > 0;
 
   return (
     <div
@@ -45,7 +46,7 @@ export default function CheckoutCard({
         "
       >
 
-        {/* Checkbox + Text */}
+        {/* Select All */}
         <button
           onClick={onToggleAll}
 
@@ -86,7 +87,6 @@ export default function CheckoutCard({
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
-
                 stroke="white"
                 strokeWidth="3"
 
@@ -105,7 +105,6 @@ export default function CheckoutCard({
 
           </div>
 
-          {/* Label */}
           <p
             className="
               font-signika
@@ -120,7 +119,11 @@ export default function CheckoutCard({
         </button>
 
         {/* Total */}
-        <div className="text-right">
+        <div
+          className="
+            text-right
+          "
+        >
 
           <p
             className="
@@ -143,7 +146,9 @@ export default function CheckoutCard({
             "
           >
             Rp.
-            {total.toLocaleString("id-ID")}
+            {total.toLocaleString(
+              "id-ID"
+            )}
           </p>
 
         </div>
@@ -151,12 +156,23 @@ export default function CheckoutCard({
       </div>
 
       {/* Checkout Button */}
-      <div className="mt-5">
+      <div
+        className="
+          mt-5
+        "
+      >
 
         <Button
           text="Checkout"
 
-          onClick={onCheckout}
+          onClick={() => {
+
+            if (!hasSelected) {
+              return;
+            }
+
+            onCheckout?.();
+          }}
 
           disabled={!hasSelected}
 

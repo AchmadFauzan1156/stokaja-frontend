@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useCart }
 from "@/context/CartContext";
 
+import { useRouter }
+from "next/navigation";
+
 import ProfilePicture from "@/components/ProfilePicture";
 import Navbar from "@/components/Navbar";
 
@@ -24,6 +27,9 @@ export default function CartPage() {
   } = useCart();
 
   /* ───────── Select All ───────── */
+
+  const router =
+  useRouter();
 
   const allChecked =
     cartItems.length > 0 &&
@@ -176,11 +182,11 @@ export default function CartPage() {
         onToggleAll={toggleAll}
 
         onCheckout={() =>
-          console.log(
-            "Checkout clicked"
-          )
+            router.push(
+            "/checkout"
+            )
         }
-      />
+        />
 
       {/* ───────── Navbar ───────── */}
       <Navbar />

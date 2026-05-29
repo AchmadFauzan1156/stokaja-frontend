@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import ChatHeader from "@/components/ChatHeader";
 import ChatBubble from "@/components/ChatBubble";
 import ChatInput from "@/components/ChatInput";
+import ChatDate from "@/components/ChatDate";
 
 import { dummyChats }
 from "@/data/dummyChats";
@@ -22,6 +23,9 @@ export default function ChatRoom() {
     message
   ) => {
 
+    const now =
+      new Date();
+
     const newChat = {
       id: Date.now(),
 
@@ -29,14 +33,19 @@ export default function ChatRoom() {
 
       message,
 
-      time: new Date()
-        .toLocaleTimeString(
+      time:
+        now.toLocaleTimeString(
           "id-ID",
           {
             hour: "2-digit",
             minute: "2-digit",
           }
         ),
+
+      date:
+        now
+          .toISOString()
+          .split("T")[0],
     };
 
     setChats((prev) => [
@@ -79,19 +88,53 @@ export default function ChatRoom() {
           "
         >
 
-          {chats.map((chat) => (
+          {chats.map(
+            (
+              chat,
+              index
+            ) => {
 
-            <ChatBubble
-              key={chat.id}
+              const showDate =
+                index === 0 ||
 
-              sender={chat.sender}
+                chats[
+                  index - 1
+                ].date !==
+                  chat.date;
 
-              message={chat.message}
+              return (
+                <div
+                  key={chat.id}
+                >
 
-              time={chat.time}
-            />
+                  {/* Date Separator */}
+                  {showDate && (
+                    <ChatDate
+                      date={
+                        chat.date
+                      }
+                    />
+                  )}
 
-          ))}
+                  {/* Chat Bubble */}
+                  <ChatBubble
+                    sender={
+                      chat.sender
+                    }
+
+                    message={
+                      chat.message
+                    }
+
+                    time={
+                      chat.time
+                    }
+                  />
+
+                </div>
+              );
+            }
+          )}
 
         </div>
 

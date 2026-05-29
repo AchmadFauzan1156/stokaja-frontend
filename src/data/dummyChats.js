@@ -8,6 +8,8 @@ export const dummyChats = [
       "Halo kak 👋 Ada yang bisa kami bantu?",
 
     time: "08:21",
+
+    date: "2026-05-29",
   },
 
   {
@@ -19,16 +21,7 @@ export const dummyChats = [
       "Halo min, stok minyak goreng masih ada?",
 
     time: "08:22",
-  },
 
-  {
-    id: 3,
-
-    sender: "admin",
-
-    message:
-      "Masih ada kak 😊",
-
-    time: "08:23",
+    date: "2026-05-29",
   },
 ];
