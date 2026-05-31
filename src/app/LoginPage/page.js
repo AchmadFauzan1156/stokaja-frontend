@@ -5,14 +5,24 @@ import { useState } from "react";
 import { useRouter }
 from "next/navigation";
 
+import { useAuth }
+from "@/context/AuthContext";
+
+import { useToast }
+from "@/components/Toast";
+
 import TextBox from "@/components/TextBox";
 import Button from "@/components/Button";
 import Link from "next/link";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function LoginPage() {
 
   const router =
     useRouter();
+
+  const { login } = useAuth();
+  const { showError } = useToast();
 
   const [email, setEmail] =
     useState("");
@@ -20,10 +30,16 @@ export default function LoginPage() {
   const [password, setPassword] =
     useState("");
 
+  const [isLoading, setIsLoading] =
+    useState(false);
+
   const [
-    showError,
-    setShowError,
+    showErrorModal,
+    setShowErrorModal,
   ] = useState(false);
+
+  const [errorMessage, setErrorMessage] =
+    useState("");
 
   const emailValid =
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -33,33 +49,35 @@ export default function LoginPage() {
     emailValid &&
     password.trim() !== "";
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
-    const validEmail =
-      "admin@stokaja.com";
+    if (!formValid || isLoading) return;
 
-    const validPassword =
-      "12345678";
+    setIsLoading(true);
 
-    if (
-      email !== validEmail ||
-      password !== validPassword
-    ) {
+    try {
+      const user = await login(email, password);
 
-      setShowError(true);
-
-      return;
+      // Redirect berdasarkan role
+      if (user.role === "admin" || user.role === "kasir") {
+        router.push("/home");
+      } else {
+        router.push("/home");
+      }
+    } catch (error) {
+      setErrorMessage(
+        error.message || "Email atau password salah."
+      );
+      setShowErrorModal(true);
+    } finally {
+      setIsLoading(false);
     }
-
-    router.push(
-      "/home"
-    );
   };
 
   return (
     <>
       {/* Error Modal */}
-      {showError && (
+      {showErrorModal && (
 
         <div
           className="
@@ -108,9 +126,7 @@ export default function LoginPage() {
                 text-[#555]
               "
             >
-              Email atau password
-              yang Anda masukkan
-              salah.
+              {errorMessage}
             </p>
 
             <div
@@ -126,7 +142,7 @@ export default function LoginPage() {
                 text="OK"
 
                 onClick={() =>
-                  setShowError(
+                  setShowErrorModal(
                     false
                   )
                 }
@@ -273,21 +289,27 @@ export default function LoginPage() {
         </div>
 
         {/* Login Button */}
-        <Button
-          text="Log In"
+        {isLoading ? (
+          <div className="mt-77.5">
+            <LoadingSpinner size="md" />
+          </div>
+        ) : (
+          <Button
+            text="Log In"
 
-          onClick={
-            handleLogin
-          }
+            onClick={
+              handleLogin
+            }
 
-          disabled={!formValid}
+            disabled={!formValid}
 
-          className="
-            mt-77.5
+            className="
+              mt-77.5
 
-            leading-none
-          "
-        />
+              leading-none
+            "
+          />
+        )}
 
       </div>
     </>

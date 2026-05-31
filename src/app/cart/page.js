@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 
-import { useCart }
-from "@/context/CartContext";
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 
 import { useRouter }
 from "next/navigation";
@@ -25,6 +25,8 @@ export default function CartPage() {
 
     updateCartQty,
   } = useCart();
+  
+  const { user } = useAuth();
 
   /* ───────── Select All ───────── */
 
@@ -111,7 +113,7 @@ export default function CartPage() {
           </h1>
 
           <Link href="/profile">
-            <ProfilePicture />
+            <ProfilePicture src={user?.avatar || "/Profile.jpg"} />
           </Link>
 
         </div>

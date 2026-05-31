@@ -9,6 +9,14 @@ import {
   CartProvider,
 } from "@/context/CartContext";
 
+import {
+  AuthProvider,
+} from "@/context/AuthContext";
+
+import {
+  ToastProvider,
+} from "@/components/Toast";
+
 const squadaOne =
   Squada_One({
     subsets: ["latin"],
@@ -65,6 +73,8 @@ export default function RootLayout({
         `}
       >
 
+        <AuthProvider>
+        <ToastProvider>
         <CartProvider>
 
           <main
@@ -88,6 +98,8 @@ export default function RootLayout({
           </main>
 
         </CartProvider>
+        </ToastProvider>
+        </AuthProvider>
 
       </body>
 

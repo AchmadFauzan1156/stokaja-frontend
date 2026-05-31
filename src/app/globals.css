@@ -1,22 +1,21 @@
 @import "tailwindcss";
 
-h1 {
-  font-family: var(--font-squadaOne);;
+@theme {
+  --font-squada: var(--font-squadaOne);
+  --font-signika: var(--font-signika);
 }
 
-.font-squadaOne {
-  font-family: var(--font-squadaOne);
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.font-signika {
-  font-family: var(--font-signika);
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
 }

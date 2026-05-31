@@ -2,11 +2,25 @@
 
 import { useState } from "react";
 
+import { useRouter }
+from "next/navigation";
+
+import { useAuth }
+from "@/context/AuthContext";
+
+import { useToast }
+from "@/components/Toast";
+
 import TextBox from "@/components/TextBox";
 import Button from "@/components/Button";
 import Link from "next/link";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function RegisterPage() {
+
+  const router = useRouter();
+  const { register } = useAuth();
+  const { showSuccess, showError } = useToast();
 
   const [email, setEmail] =
     useState("");
@@ -21,6 +35,9 @@ export default function RegisterPage() {
     confirmPassword,
     setConfirmPassword,
   ] = useState("");
+
+  const [isLoading, setIsLoading] =
+    useState(false);
 
   const emailValid =
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -38,6 +55,27 @@ export default function RegisterPage() {
     passwordValid &&
     passwordsMatch &&
     confirmPassword !== "";
+
+  const handleRegister = async () => {
+
+    if (!formValid || isLoading) return;
+
+    setIsLoading(true);
+
+    try {
+      await register(email, password, fullName);
+
+      showSuccess("Registrasi berhasil! Selamat datang 🎉");
+
+      router.push("/home");
+    } catch (error) {
+      showError(
+        error.message || "Registrasi gagal, silakan coba lagi."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
@@ -202,16 +240,24 @@ export default function RegisterPage() {
       </div>
 
       {/* Register Button */}
-      <Button
-        text="Sign Up"
+      {isLoading ? (
+        <div className="mt-36">
+          <LoadingSpinner size="md" />
+        </div>
+      ) : (
+        <Button
+          text="Sign Up"
 
-        className="
-          mt-36
-          leading-none
-        "
+          onClick={handleRegister}
 
-        disabled={!formValid}
-      />
+          className="
+            mt-36
+            leading-none
+          "
+
+          disabled={!formValid}
+        />
+      )}
 
     </div>
   );

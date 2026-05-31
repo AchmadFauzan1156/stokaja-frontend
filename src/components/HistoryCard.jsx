@@ -3,11 +3,43 @@
 import Link from "next/link";
 import Image from "next/image";
 
+/**
+ * Props yang diterima dari mapTransaction():
+ *   id, date (ISO string), status, total, paymentMethod, items, ...
+ */
 export default function HistoryCard({
   id,
   date,
-  message,
+  status,
+  total,
+  items,
 }) {
+  // Format tanggal dari ISO string menjadi "30 Mei 2026"
+  const formattedDate = (() => {
+    try {
+      return new Date(date).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } catch {
+      return date || "-";
+    }
+  })();
+
+  // Generate pesan ringkasan berdasarkan status
+  const statusLabels = {
+    pending: "Menunggu Konfirmasi",
+    diproses: "Pesanan Sedang Diproses",
+    dikirim: "Pesanan Dalam Pengiriman",
+    selesai: "Pesanan Selesai",
+    batal: "Pesanan Dibatalkan",
+  };
+
+  const statusMessage = statusLabels[status] || status || "-";
+
+  // Jumlah item di keranjang
+  const itemCount = items?.length || 0;
 
   return (
     <div
@@ -31,7 +63,7 @@ export default function HistoryCard({
           text-[#555]
         "
       >
-        {date}
+        {formattedDate}
       </p>
 
       <div
@@ -52,16 +84,22 @@ export default function HistoryCard({
           height={70}
         />
 
-        <p
-          className="
-            font-signika
-            text-[18px]
+        <div className="flex-1">
+          <p
+            className="
+              font-signika
+              text-[18px]
+              font-semibold
 
-            text-[#555]
-          "
-        >
-          {message}
-        </p>
+              text-[#555]
+            "
+          >
+            {statusMessage}
+          </p>
+          <p className="font-signika text-[14px] text-[#888] mt-1">
+            {itemCount} produk • Rp{(total || 0).toLocaleString("id-ID")}
+          </p>
+        </div>
 
       </div>
 
