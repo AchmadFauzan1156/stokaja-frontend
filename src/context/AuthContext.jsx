@@ -7,6 +7,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import {
   apiPost,
@@ -25,7 +26,6 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Muat profil user dari token yang tersimpan saat pertama kali load
   const loadUser = useCallback(async () => {
     const token = getAccessToken();
     if (!token) {
@@ -47,6 +47,25 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     loadUser();
   }, [loadUser]);
+
+  // --- AUTH GUARD ROUTING ---
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading) {
+      const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/ResetPassword", "/SplashScreen"];
+      const isPublicRoute = publicRoutes.includes(pathname);
+
+      if (!user && !isPublicRoute) {
+        // Jika belum login tapi akses halaman private, tendang ke login
+        router.replace("/LoginPage");
+      } else if (user && (pathname === "/LoginPage" || pathname === "/RegisterPage" || pathname === "/")) {
+        // Jika sudah login tapi akses halaman login/register, arahkan ke home
+        router.replace("/home");
+      }
+    }
+  }, [user, isLoading, pathname, router]);
 
   // --- LOGIN ---
   const login = async (email, password) => {
