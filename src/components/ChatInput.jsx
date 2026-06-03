@@ -63,7 +63,7 @@ export default function ChatInput({
           }
 
           placeholder="Tulis pesan..."
-
+          maxLength={1000}
           rows={1}
 
           className="
@@ -127,7 +127,11 @@ export default function ChatInput({
         </button>
 
       </div>
-
+      {message.length > 800 && (
+        <div className="mt-1 px-2 text-right font-signika text-xs text-[#888]">
+          {message.length} / 1000 karakter
+        </div>
+      )}
     </div>
   );
 }

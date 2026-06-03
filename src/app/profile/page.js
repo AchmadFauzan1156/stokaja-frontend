@@ -34,6 +34,14 @@ export default function ProfilePage() {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Validasi ukuran file maks 2 MB
+    if (file.size > 2 * 1024 * 1024) {
+      showError("Ukuran gambar maksimal 2 MB");
+      // Reset input file
+      event.target.value = "";
+      return;
+    }
+
     // Simpan file untuk diupload nanti
     setSelectedFile(file);
     // Preview lokal
