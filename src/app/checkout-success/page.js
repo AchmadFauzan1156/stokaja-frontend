@@ -57,12 +57,12 @@ export default function CheckoutSuccessPage() {
         "
       >
 
-        <Link href="/cart">
+        <Link href="/history">
+          <Button text="Lihat Riwayat Pesanan" />
+        </Link>
 
-          <Button
-            text="Kembali"
-          />
-
+        <Link href="/home">
+          <Button text="Kembali Berbelanja" variant="secondary" />
         </Link>
 
       </div>

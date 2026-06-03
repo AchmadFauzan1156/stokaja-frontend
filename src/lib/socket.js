@@ -25,6 +25,17 @@ export function getSocket() {
 
   socket.on("connect", () => {
     console.log("📡 Socket.io connected:", socket.id);
+    
+    // Parse JWT token manually to get user ID
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.id) {
+        socket.emit("join_room", payload.id);
+        console.log("Joined room:", payload.id);
+      }
+    } catch (e) {
+      console.error("Gagal join room:", e);
+    }
   });
 
   socket.on("connect_error", (err) => {

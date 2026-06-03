@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
 } from "react";
 
 const CartContext =
@@ -12,9 +13,28 @@ const CartContext =
 export function CartProvider({
   children,
 }) {
+  const [cartItems, setCartItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [cartItems, setCartItems] =
-    useState([]);
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("stokaja_cart");
+    if (saved) {
+      try {
+        setCartItems(JSON.parse(saved));
+      } catch (e) {
+        console.error("Gagal membaca cart dari localStorage", e);
+      }
+    }
+    setIsLoaded(true);
+  }, []);
+
+  // Save to localStorage whenever cartItems changes
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("stokaja_cart", JSON.stringify(cartItems));
+    }
+  }, [cartItems, isLoaded]);
 
   /* ───────── Add To Cart ───────── */
 

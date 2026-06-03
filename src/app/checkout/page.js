@@ -87,7 +87,7 @@ export default function CheckoutPage() {
 
       clearCart();
       showSuccess("Pesanan berhasil dibuat!");
-      router.push("/history"); // Arahkan ke history karena checkout-success mungkin tidak ada
+      router.push("/checkout-success"); 
     } catch (error) {
       showError(error.message || "Gagal membuat pesanan");
     } finally {
