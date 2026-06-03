@@ -20,16 +20,20 @@ export default function CheckoutPage() {
 
   const addresses = user?.addresses || [];
 
-  const [selectedAddress, setSelectedAddress] = useState(addresses[0] || null);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!selectedAddress && addresses.length > 0) {
-      setSelectedAddress(addresses[0]);
+    if (!selectedAddressId && addresses.length > 0) {
+      setSelectedAddressId(addresses[0].id);
+    } else if (selectedAddressId && !addresses.find(a => a.id === selectedAddressId)) {
+      setSelectedAddressId(addresses[0]?.id || null);
     }
-  }, [addresses, selectedAddress]);
+  }, [addresses, selectedAddressId]);
+
+  const selectedAddress = addresses.find(a => a.id === selectedAddressId) || null;
 
   useEffect(() => {
     const fetchPaymentMethods = async () => {
@@ -142,11 +146,11 @@ export default function CheckoutPage() {
             addresses.map((address) => (
               <button
                 key={address.id}
-                onClick={() => setSelectedAddress(address)}
+                onClick={() => setSelectedAddressId(address.id)}
                 className={`
                   rounded-xl border-2 p-4 text-left transition-all
                   ${
-                    selectedAddress?.id === address.id
+                    selectedAddressId === address.id
                       ? "border-[#B6D04E] bg-[#F8FFE7]"
                       : "border-[#D4D4D4]"
                   }

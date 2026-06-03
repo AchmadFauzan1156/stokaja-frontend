@@ -74,15 +74,8 @@ export function AuthProvider({ children }) {
     if (res.success && res.data) {
       setTokens(res.data.accessToken, res.data.refreshToken);
 
-      const userData = {
-        id: res.data.user.id,
-        fullName: res.data.user.namaLengkap,
-        email: res.data.user.email,
-        role: res.data.user.role,
-      };
-
+      const userData = await refreshProfile();
       localStorage.setItem("user", JSON.stringify(userData));
-      setUser(userData);
 
       return userData;
     }
@@ -97,15 +90,8 @@ export function AuthProvider({ children }) {
     if (res.success && res.data) {
       setTokens(res.data.accessToken, res.data.refreshToken);
 
-      const userData = {
-        id: res.data.user.id,
-        fullName: res.data.user.namaLengkap,
-        email: res.data.user.email,
-        role: res.data.user.role,
-      };
-
+      const userData = await refreshProfile();
       localStorage.setItem("user", JSON.stringify(userData));
-      setUser(userData);
 
       return userData;
     }

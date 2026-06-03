@@ -204,7 +204,7 @@ export function CartProvider({
   /* ───────── Clear Cart ───────── */
 
   const clearCart = () => {
-    setCartItems([]);
+    setCartItems((prev) => prev.filter((item) => !item.checked));
   };
 
   return (

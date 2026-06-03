@@ -19,6 +19,7 @@ export default function ProfilePicture({
         width={56}
         height={56}
         className="w-full h-full object-cover"
+        unoptimized={src.startsWith("blob:") || src.startsWith("data:")}
       />
     </div>
   );
