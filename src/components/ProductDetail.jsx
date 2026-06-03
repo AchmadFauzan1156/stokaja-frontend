@@ -158,7 +158,7 @@ export default function ProductDetail({
             "
           >
             Rp
-            {product.price.toLocaleString(
+            {(product.price || 0).toLocaleString(
               "id-ID"
             )}
           </p>

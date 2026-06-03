@@ -45,11 +45,11 @@ export default function HomePage() {
   }, [showError]);
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = (product.name || "").toLowerCase().includes(search.toLowerCase());
     const matchesCategory =
       selectedCategory === "All"
         ? true
-        : product.category === selectedCategory;
+        : (product.category || "").toLowerCase() === selectedCategory.toLowerCase();
     return matchesSearch && matchesCategory;
   });
 

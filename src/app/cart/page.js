@@ -24,6 +24,7 @@ export default function CartPage() {
     deleteItem,
 
     updateCartQty,
+    toggleAll,
   } = useCart();
   
   const { user } = useAuth();
@@ -39,13 +40,8 @@ export default function CartPage() {
       (item) => item.checked
     );
 
-  const toggleAll = () => {
-
-    cartItems.forEach((item) => {
-      if (item.checked !== !allChecked) {
-        toggleCheck(item.id);
-      }
-    });
+  const handleToggleAll = () => {
+    toggleAll(!allChecked);
   };
 
   /* ───────── Total ───────── */
@@ -181,7 +177,7 @@ export default function CartPage() {
 
         allChecked={allChecked}
 
-        onToggleAll={toggleAll}
+        onToggleAll={handleToggleAll}
 
         onCheckout={() =>
             router.push(

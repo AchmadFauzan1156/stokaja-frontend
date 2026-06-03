@@ -32,8 +32,8 @@ export default function NewPasswordPage({ params }) {
       return;
     }
 
-    if (password.length < 6) {
-      showError("Password minimal 6 karakter");
+    if (password.length < 8) {
+      showError("Password minimal 8 karakter");
       return;
     }
 
