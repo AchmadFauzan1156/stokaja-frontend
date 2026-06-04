@@ -60,8 +60,8 @@ export function AuthProvider({ children }) {
       if (!user && !isPublicRoute) {
         // Jika belum login tapi akses halaman private, tendang ke login
         router.replace("/LoginPage");
-      } else if (user && (pathname === "/LoginPage" || pathname === "/RegisterPage" || pathname === "/")) {
-        // Jika sudah login tapi akses halaman login/register, arahkan ke home
+      } else if (user && (pathname === "/LoginPage" || pathname === "/RegisterPage" || pathname === "/" || pathname === "/SplashScreen")) {
+        // Jika sudah login tapi akses halaman login/register/splash, arahkan ke home
         router.replace("/home");
       }
     }

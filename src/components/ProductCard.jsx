@@ -295,7 +295,7 @@ export default function ProductCard({
               text-[#e05c1a]
             "
           >
-            {formatRupiah(price)}
+            {formatRupiah(price || 0)}
           </p>
         </div>
 

@@ -25,11 +25,14 @@ function HistoryDetailContent() {
       }
       try {
         setIsLoading(true);
-        const res = await apiGet("/pesananku?limit=100");
-        const mapped = mapTransactions(res.data);
-        const found = mapped.find((item) => item.id === idString);
-        if (found) {
-          setOrder(found);
+        const res = await apiGet(`/transaksi/${idString}`);
+        if (res.data) {
+          const mapped = mapTransactions([res.data]);
+          if (mapped.length > 0) {
+            setOrder(mapped[0]);
+          } else {
+            showError("Pesanan tidak ditemukan");
+          }
         } else {
           showError("Pesanan tidak ditemukan");
         }
