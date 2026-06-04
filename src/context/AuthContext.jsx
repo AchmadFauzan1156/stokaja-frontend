@@ -114,7 +114,7 @@ export function AuthProvider({ children }) {
   // --- REFRESH PROFIL ---
   const refreshProfile = async () => {
     try {
-      const res = await apiGet("/profil");
+      const res = await apiGet("/users/profil");
       const mapped = mapUser(res.data);
       setUser(mapped);
       return mapped;
