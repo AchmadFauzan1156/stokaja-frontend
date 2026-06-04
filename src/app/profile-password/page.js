@@ -20,11 +20,17 @@ export default function ProfilePasswordPage() {
 
   const handleSave = async () => {
     if (!oldPassword || !newPassword || !confirmPassword) {
-      showError("Semua field harus diisi");
+      showError("Semua field harus diisi!");
       return;
     }
+
+    if (newPassword.length < 8) {
+      showError("Password baru minimal 8 karakter!");
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
-      showError("Password baru dan konfirmasi tidak sama");
+      showError("Password baru dan konfirmasi tidak cocok!");
       return;
     }
 

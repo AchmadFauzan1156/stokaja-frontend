@@ -41,7 +41,7 @@ export default function CartPage() {
     );
 
   const handleToggleAll = () => {
-    toggleAll(!allChecked);
+    toggleAll();
   };
 
   /* ───────── Total ───────── */

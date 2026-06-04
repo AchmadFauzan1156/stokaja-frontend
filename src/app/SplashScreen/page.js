@@ -2,25 +2,25 @@
 
 import { useEffect } from "react";
 
-import { useRouter }
-from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export default function SplashScreen() {
 
   const router = useRouter();
+  const { user, isLoading } = useAuth();
 
   useEffect(() => {
+    if (isLoading) return; // Tunggu auth selesai memeriksa
 
     const timer = setTimeout(() => {
-
-      router.push("/RegisterPage");
-
+      if (!user) {
+        router.push("/RegisterPage");
+      }
     }, 2500);
 
-    return () =>
-      clearTimeout(timer);
-
-  }, [router]);
+    return () => clearTimeout(timer);
+  }, [router, user, isLoading]);
 
   return (
     <div
