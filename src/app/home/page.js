@@ -31,9 +31,34 @@ export default function HomePage() {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        // Bisa tambahkan pagination logic di sini jika perlu, tapi kita fetch semua (limit besar) untuk sekarang
-        const res = await apiGet("/produk?limit=100");
-        setProducts(mapProducts(res.data));
+        const resProduk = await apiGet("/produk?limit=100");
+        const resBahan = await apiGet("/bahan-baku?limit=100");
+
+        const produkList = Array.isArray(resProduk) ? resProduk : (resProduk.data || []);
+        const bahanList = Array.isArray(resBahan) ? resBahan : (resBahan.data || []);
+
+        const mappedProduk = mapProducts(produkList).map(p => ({ ...p, type: "produk" }));
+        
+        const mappedBahan = bahanList.map(b => ({
+          id: b._id,
+          name: b.namaBahan,
+          description: b.deskripsi || "",
+          category: "Bahan Baku",
+          categoryId: "bahan-baku",
+          price: b.hargaJual,
+          stock: b.stok,
+          minStock: b.stokMinimum || 5,
+          maxStock: 100,
+          unit: b.satuan,
+          qty: `${b.stok} ${b.satuan}`,
+          costPrice: b.hargaModal || 0,
+          image: b.gambar || null,
+          createdAt: b.createdAt,
+          updatedAt: b.updatedAt,
+          type: "bahanBaku"
+        }));
+
+        setProducts([...mappedProduk, ...mappedBahan]);
       } catch (error) {
         showError(error.message || "Gagal memuat produk");
       } finally {
