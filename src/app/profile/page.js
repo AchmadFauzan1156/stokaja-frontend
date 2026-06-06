@@ -59,7 +59,7 @@ export default function ProfilePage() {
         formData.append("avatar", selectedFile);
       }
 
-      await apiPut("/profil", formData);
+      await apiPut("/users/profil", formData);
       await refreshProfile();
       setSelectedFile(null); // Reset setelah berhasil
       showSuccess("Profil berhasil diperbarui");

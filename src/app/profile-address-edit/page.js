@@ -44,11 +44,11 @@ function AddressEditForm() {
       
       if (id) {
         // Edit
-        await apiPut(`/profil/alamat/${id}`, payload);
+        await apiPut(`/users/profil/alamat/${id}`, payload);
         showSuccess("Alamat berhasil diperbarui");
       } else {
         // Create
-        await apiPost("/profil/alamat", payload);
+        await apiPost("/users/profil/alamat", payload);
         showSuccess("Alamat berhasil ditambahkan");
       }
       
@@ -67,7 +67,7 @@ function AddressEditForm() {
 
     setIsDeleting(true);
     try {
-      await apiDelete(`/profil/alamat/${id}`);
+      await apiDelete(`/users/profil/alamat/${id}`);
       showSuccess("Alamat berhasil dihapus");
       await refreshProfile();
       router.push("/profile-address");

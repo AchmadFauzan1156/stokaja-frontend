@@ -33,7 +33,7 @@ export default function ProfileEmailPage() {
     setIsSaving(true);
     try {
       const payload = unmapProfileUpdate({ email });
-      await apiPut("/profil", payload);
+      await apiPut("/users/profil", payload);
       await refreshProfile();
       showSuccess("Email berhasil diperbarui");
       router.push("/profile");

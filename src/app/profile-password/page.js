@@ -37,7 +37,7 @@ export default function ProfilePasswordPage() {
     setIsSaving(true);
     try {
       const payload = unmapProfileUpdate({ oldPassword, newPassword });
-      await apiPut("/profil", payload);
+      await apiPut("/users/profil", payload);
       showSuccess("Password berhasil diperbarui");
       router.push("/profile");
     } catch (error) {
