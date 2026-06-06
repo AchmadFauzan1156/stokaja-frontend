@@ -73,8 +73,8 @@ export default function CheckoutPage() {
       showError("Tidak ada produk yang dipilih");
       return;
     }
-    if (!selectedAddress && addresses.length > 0) {
-      showError("Pilih alamat pengiriman terlebih dahulu");
+    if (!selectedAddress) {
+      showError("Anda harus menambahkan alamat pengiriman terlebih dahulu (di Profil).");
       return;
     }
 

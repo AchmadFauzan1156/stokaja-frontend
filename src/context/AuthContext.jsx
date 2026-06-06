@@ -55,7 +55,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!isLoading) {
       const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen"];
-      const isPublicRoute = publicRoutes.includes(pathname) || pathname.startsWith("/reset-password");
+      const isPublicRoute = publicRoutes.includes(pathname) || pathname.toLowerCase().startsWith("/reset-password");
 
       if (!user && !isPublicRoute) {
         // Jika belum login tapi akses halaman private, tendang ke login

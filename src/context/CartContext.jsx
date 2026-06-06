@@ -38,11 +38,9 @@ export function CartProvider({
 
   /* ───────── Add To Cart ───────── */
 
-  const addToCart = ({
-    product,
-    qty,
-    note,
-  }) => {
+  const addToCart = ({ product, qty, note }) => {
+    // SECURITY PATCH: Jangan izinkan masuk keranjang jika stok habis
+    if (product.stock <= 0) return;
 
     setCartItems((prev) => {
 
@@ -55,34 +53,23 @@ export function CartProvider({
       /* Produk sudah ada */
       if (existing) {
 
-        return prev.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-
-                cartQty:
-                  Math.min(
-                    item.stock,
-                    item.cartQty + qty
-                  ),
-
-                note,
-              }
-            : item
-        );
+        return prev.map((item) => {
+          if (item.id === product.id) {
+            const newQty = Math.min(item.stock, item.cartQty + qty);
+            const newNote = note ? (item.note ? `${item.note}, ${note}` : note) : item.note;
+            return { ...item, cartQty: newQty, note: newNote };
+          }
+          return item;
+        });
       }
 
       /* Produk baru */
       return [
         ...prev,
-
         {
           ...product,
-
-          cartQty: qty,
-
+          cartQty: Math.min(product.stock, qty),
           note,
-
           checked: true,
         },
       ];

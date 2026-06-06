@@ -28,7 +28,9 @@ export function getSocket() {
     
     // Parse JWT token manually to get user ID
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      let base64Url = token.split('.')[1];
+      let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const payload = JSON.parse(atob(base64));
       if (payload.id) {
         socket.emit("join_room", payload.id);
         console.log("Joined room:", payload.id);

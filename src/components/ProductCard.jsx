@@ -63,7 +63,7 @@ export default function ProductCard({
 
   return (
     <div
-      onClick={onClick}
+      onClick={isOut ? undefined : onClick}
 
       className="
         relative
