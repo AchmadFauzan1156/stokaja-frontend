@@ -14,6 +14,7 @@ export default function ForgotPasswordPage() {
   const { showSuccess, showError } = useToast();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [resetUrl, setResetUrl] = useState("");
 
   const handleSubmit = async () => {
     if (!email.trim()) {
@@ -23,10 +24,15 @@ export default function ForgotPasswordPage() {
 
     setIsLoading(true);
     try {
-      await apiPost("/forgot-password", { email });
-      showSuccess("Link reset password telah dikirim ke email Anda");
+      const res = await apiPost("/forgot-password", { email });
+      if (res.data?.resetUrl) {
+        setResetUrl(res.data.resetUrl);
+        showSuccess("Simulasi berhasil! Klik link di layar.");
+      } else {
+        showSuccess("Link reset password telah dikirim ke email Anda");
+        router.push("/LoginPage");
+      }
       setEmail("");
-      router.push("/LoginPage");
     } catch (error) {
       showError(error.message || "Gagal mengirim link reset");
     } finally {
@@ -52,24 +58,37 @@ export default function ForgotPasswordPage() {
         Masukkan E-mail Anda untuk mendapatkan link Reset Password
       </p>
 
-      <TextBox 
-        placeholder="E-Mail" 
-        type="email" 
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      {isLoading ? (
-        <div className="mt-[200px] flex justify-center">
-          <LoadingSpinner size="md" />
+      {resetUrl ? (
+        <div className="mt-8 flex w-full max-w-md flex-col gap-4 rounded-xl border border-[#FF5E33] bg-white p-6 shadow-md text-center">
+          <p className="font-signika text-[#555]">
+            Simulasi Pengiriman Email Aktif:
+          </p>
+          <Link href={resetUrl.replace(process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000", "").replace("https://stokaja-frontend.vercel.app", "")}>
+            <Button text="Ganti Password Sekarang" className="w-full text-sm" />
+          </Link>
         </div>
       ) : (
-        <Button
-          text="Get Link"
-          className="mt-[200px] leading-none"
-          onClick={handleSubmit}
-          disabled={!email.trim()}
-        />
+        <>
+          <TextBox 
+            placeholder="E-Mail" 
+            type="email" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          {isLoading ? (
+            <div className="mt-[200px] flex justify-center">
+              <LoadingSpinner size="md" />
+            </div>
+          ) : (
+            <Button
+              text="Get Link"
+              className="mt-[200px] leading-none"
+              onClick={handleSubmit}
+              disabled={!email.trim()}
+            />
+          )}
+        </>
       )}
     </div>
   );
