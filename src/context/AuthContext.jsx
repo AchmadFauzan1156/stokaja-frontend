@@ -128,6 +128,11 @@ export function AuthProvider({ children }) {
   const isAdmin = user?.role === "admin";
   const isKasir = user?.role === "kasir";
 
+  const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen"];
+  const isPublicRoute = publicRoutes.includes(pathname) || pathname.toLowerCase().startsWith("/reset-password");
+
+  const shouldBlockRender = isLoading || (!user && !isPublicRoute);
+
   return (
     <AuthContext.Provider
       value={{
@@ -142,7 +147,11 @@ export function AuthProvider({ children }) {
         refreshProfile,
       }}
     >
-      {children}
+      {shouldBlockRender ? (
+        <div style={{ minHeight: "100vh", backgroundColor: "#F0E7D6" }}></div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }

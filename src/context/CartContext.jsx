@@ -18,15 +18,29 @@ export function CartProvider({
 
   // Load from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("stokaja_cart");
-    if (saved) {
-      try {
-        setCartItems(JSON.parse(saved));
-      } catch (e) {
-        console.error("Gagal membaca cart dari localStorage", e);
+    const loadCart = () => {
+      const saved = localStorage.getItem("stokaja_cart");
+      if (saved) {
+        try {
+          setCartItems(JSON.parse(saved));
+        } catch (e) {
+          console.error("Gagal membaca cart dari localStorage", e);
+        }
       }
-    }
+    };
+
+    loadCart();
     setIsLoaded(true);
+
+    // Sinkronisasi antar tab
+    const handleStorageChange = (e) => {
+      if (e.key === "stokaja_cart") {
+        loadCart();
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   // Save to localStorage whenever cartItems changes

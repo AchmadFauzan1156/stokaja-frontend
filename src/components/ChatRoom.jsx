@@ -98,11 +98,18 @@ export default function ChatRoom() {
               </p>
             ) : (
               chats.map((chat, index) => {
-                const dateObj = new Date(chat.time);
+                let dateObj = new Date(chat.time);
+                if (isNaN(dateObj.getTime())) {
+                  dateObj = new Date(); // Fallback ke hari ini
+                }
                 const chatDate = dateObj.toISOString().split("T")[0];
-                const prevDate = index > 0 
-                  ? new Date(chats[index - 1].time).toISOString().split("T")[0] 
-                  : null;
+                
+                let prevDate = null;
+                if (index > 0) {
+                  let prevObj = new Date(chats[index - 1].time);
+                  if (isNaN(prevObj.getTime())) prevObj = new Date();
+                  prevDate = prevObj.toISOString().split("T")[0];
+                }
 
                 const showDate = index === 0 || prevDate !== chatDate;
 
