@@ -106,7 +106,7 @@ export default function HomePage() {
               setSelectedCategory={setSelectedCategory}
             />
           ) : (
-            <p className="px-1 pt-1.5 font-squadaOne text-[24px] font-medium text-[#6E822E]">
+            <p className="px-1 pt-1.5 font-squada text-[24px] font-medium text-[#6E822E]">
               {filteredProducts.length} Result(s) Found for <span className="text-[#4D5D1F]">"{search}"</span>
             </p>
           )}

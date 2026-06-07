@@ -102,11 +102,11 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-[#F0E7D6] px-5 pt-14 pb-10">
       {/* Header */}
-      <h1 className="font-squadaOne text-[36px] text-[#6E822E]">Checkout</h1>
+      <h1 className="font-squada text-[36px] text-[#6E822E]">Checkout</h1>
 
       {/* Ringkasan Belanja */}
       <div className="mt-8 rounded-3xl bg-white p-5">
-        <h2 className="font-squadaOne text-[26px] text-[#444]">
+        <h2 className="font-squada text-[26px] text-[#444]">
           Ringkasan Belanja
         </h2>
 
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
 
       {/* Address */}
       <div className="mt-5 rounded-3xl bg-white p-5">
-        <h2 className="font-squadaOne text-[26px] text-[#444]">
+        <h2 className="font-squada text-[26px] text-[#444]">
           Alamat Pengiriman
         </h2>
 
@@ -168,7 +168,7 @@ export default function CheckoutPage() {
 
       {/* Payment */}
       <div className="mt-5 rounded-3xl bg-white p-5">
-        <h2 className="font-squadaOne text-[26px] text-[#444]">
+        <h2 className="font-squada text-[26px] text-[#444]">
           Metode Pembayaran
         </h2>
 
@@ -193,7 +193,7 @@ export default function CheckoutPage() {
       <div className="mt-5 rounded-3xl bg-white p-5">
         <div className="flex items-center justify-between">
           <p className="font-signika text-[20px]">Total</p>
-          <p className="font-squadaOne text-[32px] text-[#FF5C2B]">
+          <p className="font-squada text-[32px] text-[#FF5C2B]">
             Rp{total.toLocaleString("id-ID")}
           </p>
         </div>

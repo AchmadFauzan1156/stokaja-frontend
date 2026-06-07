@@ -138,7 +138,7 @@ export default function CheckoutCard({
 
           <p
             className="
-              font-squadaOne
+              font-squada
               text-[38px]
               leading-none
 

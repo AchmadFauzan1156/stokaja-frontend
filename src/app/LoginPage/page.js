@@ -107,7 +107,7 @@ export default function LoginPage() {
 
             <h2
               className="
-                font-squadaOne
+                font-squada
                 text-[28px]
 
                 text-[#FF5C2B]
@@ -182,7 +182,7 @@ export default function LoginPage() {
           <Link
             href="/RegisterPage"
             className="
-              font-squadaOne
+              font-squada
               text-[21.526px]
 
               text-[#FF5E33]

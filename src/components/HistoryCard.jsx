@@ -57,7 +57,7 @@ export default function HistoryCard({
 
       <p
         className="
-          font-squadaOne
+          font-squada
           text-[24px]
 
           text-[#555]

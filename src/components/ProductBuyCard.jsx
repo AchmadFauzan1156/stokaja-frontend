@@ -111,7 +111,7 @@ export default function ProductBuyCard({
             {/* Name */}
             <h1
               className="
-                font-squadaOne
+                font-squada
                 text-[24px]
                 leading-none
 
@@ -316,7 +316,7 @@ export default function ProductBuyCard({
           {/* Price */}
           <p
             className="
-              font-squadaOne
+              font-squada
               text-[24px]
 
               text-[#FF5C2B]

@@ -87,7 +87,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-[#F0E7D6] pb-48">
       {/* Header */}
       <div className="px-6 pt-14">
-        <h1 className="font-squadaOne text-[36px] text-[#6E822E]">Profil</h1>
+        <h1 className="font-squada text-[36px] text-[#6E822E]">Profil</h1>
       </div>
 
       {/* Profile Picture */}

@@ -60,7 +60,7 @@ export default function HistoryPage() {
           <button
             onClick={() => setTab("history")}
             className={`
-              flex-1 rounded-full py-3 font-squadaOne text-[22px] transition-all
+              flex-1 rounded-full py-3 font-squada text-[22px] transition-all
               ${
                 tab === "history"
                   ? "bg-[#FF5C2B] text-white"
@@ -73,7 +73,7 @@ export default function HistoryPage() {
           <button
             onClick={() => setTab("process")}
             className={`
-              flex-1 rounded-full py-3 font-squadaOne text-[22px] transition-all
+              flex-1 rounded-full py-3 font-squada text-[22px] transition-all
               ${
                 tab === "process"
                   ? "bg-[#FF5C2B] text-white"

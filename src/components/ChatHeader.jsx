@@ -54,7 +54,7 @@ export default function ChatHeader() {
 
         <h1
           className="
-            font-squadaOne
+            font-squada
             text-[28px]
             leading-none
 

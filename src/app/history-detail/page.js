@@ -110,7 +110,7 @@ function HistoryDetailContent() {
 export default function HistoryDetailPage() {
   return (
     <div className="min-h-screen bg-[#F0E7D6] px-5 pt-14 pb-20">
-      <h1 className="font-squadaOne text-[36px] text-[#555]">Detail Pesanan</h1>
+      <h1 className="font-squada text-[36px] text-[#555]">Detail Pesanan</h1>
       <Suspense fallback={<div className="flex justify-center mt-20"><LoadingSpinner size="lg" /></div>}>
         <HistoryDetailContent />
       </Suspense>

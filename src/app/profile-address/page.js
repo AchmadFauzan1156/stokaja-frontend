@@ -21,7 +21,7 @@ export default function ProfileAddressPage() {
   return (
     <div className="min-h-screen bg-[#F0E7D6] px-5 pt-14">
       <div className="flex items-center justify-between">
-        <h1 className="font-squadaOne text-[36px] text-[#6E822E]">Alamat</h1>
+        <h1 className="font-squada text-[36px] text-[#6E822E]">Alamat</h1>
         <Link href="/profile" className="font-signika text-[#6E822E] font-medium">Kembali</Link>
       </div>
 

@@ -46,7 +46,7 @@ export default function ProfileEmailPage() {
 
   return (
     <div className="min-h-screen bg-[#F0E7D6] px-5 pt-14">
-      <h1 className="font-squadaOne text-[36px] text-[#6E822E]">Ubah Email</h1>
+      <h1 className="font-squada text-[36px] text-[#6E822E]">Ubah Email</h1>
       <div className="mt-8">
         <TextBox
           value={email}

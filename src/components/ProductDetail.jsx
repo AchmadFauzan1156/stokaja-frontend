@@ -151,7 +151,7 @@ export default function ProductDetail({
           {/* Price */}
           <p
             className="
-              font-squadaOne
+              font-squada
               text-[35px]
 
               text-[#FF5C2B]

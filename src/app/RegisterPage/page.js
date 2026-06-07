@@ -104,7 +104,7 @@ export default function RegisterPage() {
         <Link
           href="/LoginPage"
           className="
-            font-squadaOne
+            font-squada
             text-[21.526px]
 
             text-[#FF5E33]

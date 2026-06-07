@@ -54,7 +54,7 @@ export default function NewPasswordPage({ params }) {
       <div className="flex w-full justify-end">
         <Link
           href="/LoginPage"
-          className="text-[21.526px] text-[#FF5E33] underline font-squadaOne pb-10"
+          className="text-[21.526px] text-[#FF5E33] underline font-squada pb-10"
         >
           Log In
         </Link>

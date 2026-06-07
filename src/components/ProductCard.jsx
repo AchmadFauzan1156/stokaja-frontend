@@ -223,7 +223,7 @@ export default function ProductCard({
         {/* Nama Produk */}
         <p
           className="
-            font-squadaOne
+            font-squada
             text-[22px]
             font-normal
 
@@ -286,7 +286,7 @@ export default function ProductCard({
         >
           <p
             className="
-              font-squadaOne
+              font-squada
               text-[22px]
               font-normal
 

@@ -25,7 +25,7 @@ export default function CheckoutSuccessPage() {
 
       <h1
         className="
-          font-squadaOne
+          font-squada
           text-[42px]
 
           text-[#6E822E]

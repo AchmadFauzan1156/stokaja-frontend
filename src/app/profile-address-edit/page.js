@@ -129,7 +129,7 @@ function AddressEditForm() {
 export default function AddressEditPage() {
   return (
     <div className="min-h-screen bg-[#F0E7D6] px-5 pt-14">
-      <h1 className="font-squadaOne text-[36px] text-[#6E822E]">Alamat</h1>
+      <h1 className="font-squada text-[36px] text-[#6E822E]">Alamat</h1>
       <Suspense fallback={<div className="mt-10 flex justify-center"><LoadingSpinner size="lg" /></div>}>
         <AddressEditForm />
       </Suspense>
