@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const res = await apiGet("/profil");
+      const res = await apiGet("/users/profil");
       setUser(mapUser(res.data));
     } catch (error) {
       if (error && (error.status === 401 || error.status === 403)) {
