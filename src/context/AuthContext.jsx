@@ -36,10 +36,11 @@ export function AuthProvider({ children }) {
     try {
       const res = await apiGet("/profil");
       setUser(mapUser(res.data));
-    } catch {
-      clearTokens();
-      setUser(null);
-    } finally {
+    } catch (error) {
+      if (error && (error.status === 401 || error.status === 403)) {
+        clearTokens();
+        setUser(null);
+      }
       setIsLoading(false);
     }
   }, []);

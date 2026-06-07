@@ -68,7 +68,7 @@ async function tryRefreshToken() {
       clearTokens();
       return null;
     } catch {
-      clearTokens();
+      // Jangan clearTokens jika terjadi network error (internet putus sesaat)
       return null;
     } finally {
       refreshTokenPromise = null;
