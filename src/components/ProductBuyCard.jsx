@@ -76,6 +76,7 @@ export default function ProductBuyCard({
           <img
             src={image}
             alt={name}
+            onError={(e) => { e.target.onerror = null; e.target.src = '/image-error.png'; }}
             className="
               h-full
               w-full

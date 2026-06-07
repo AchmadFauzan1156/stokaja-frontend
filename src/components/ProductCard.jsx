@@ -112,6 +112,7 @@ export default function ProductCard({
             src={image}
             alt={name}
             loading="lazy"
+            onError={(e) => { e.target.onerror = null; e.target.src = '/image-error.png'; }}
             className="
               block
               h-full

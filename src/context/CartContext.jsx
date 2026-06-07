@@ -22,7 +22,18 @@ export function CartProvider({
       const saved = localStorage.getItem("stokaja_cart");
       if (saved) {
         try {
-          setCartItems(JSON.parse(saved));
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            // Also ensure numeric validity and positive values for cartQty and price
+            const validCart = parsed.map(item => ({
+              ...item,
+              cartQty: isNaN(item.cartQty) || item.cartQty < 1 ? 1 : Number(item.cartQty),
+              price: isNaN(item.price) || item.price < 0 ? 0 : Number(item.price)
+            }));
+            setCartItems(validCart);
+          } else {
+            setCartItems([]);
+          }
         } catch (e) {
           console.error("Gagal membaca cart dari localStorage", e);
         }
