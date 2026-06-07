@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import TextBox from "@/components/TextBox";
 import Button from "@/components/Button";
@@ -9,6 +10,7 @@ import { apiPost } from "@/lib/api";
 import { useToast } from "@/components/Toast";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
   const { showSuccess, showError } = useToast();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +26,7 @@ export default function ForgotPasswordPage() {
       await apiPost("/forgot-password", { email });
       showSuccess("Link reset password telah dikirim ke email Anda");
       setEmail("");
+      router.push("/LoginPage");
     } catch (error) {
       showError(error.message || "Gagal mengirim link reset");
     } finally {
