@@ -56,7 +56,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     if (!isLoading) {
-      const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen"];
+      const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen", "/ResetPassword"];
       const isPublicRoute = publicRoutes.includes(pathname) || pathname.toLowerCase().startsWith("/reset-password");
 
       if (!user && !isPublicRoute) {
@@ -129,7 +129,7 @@ export function AuthProvider({ children }) {
   const isAdmin = user?.role === "admin";
   const isKasir = user?.role === "kasir";
 
-  const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen"];
+  const publicRoutes = ["/", "/LoginPage", "/RegisterPage", "/SplashScreen", "/ResetPassword"];
   const isPublicRoute = publicRoutes.includes(pathname) || pathname.toLowerCase().startsWith("/reset-password");
 
   const shouldBlockRender = isLoading || (!user && !isPublicRoute);
