@@ -98,21 +98,29 @@ export async function apiFetch(endpoint, options = {}) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  let res = await fetch(`${API_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
+  let res;
+  try {
+    res = await fetch(`${API_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
 
-  // Auto refresh token jika 401
-  if (res.status === 401 && token) {
-    const newToken = await tryRefreshToken();
-    if (newToken) {
-      headers["Authorization"] = `Bearer ${newToken}`;
-      res = await fetch(`${API_URL}${endpoint}`, {
-        ...options,
-        headers,
-      });
+    // Auto refresh token jika 401
+    if (res.status === 401 && token) {
+      const newToken = await tryRefreshToken();
+      if (newToken) {
+        headers["Authorization"] = `Bearer ${newToken}`;
+        res = await fetch(`${API_URL}${endpoint}`, {
+          ...options,
+          headers,
+        });
+      }
     }
+  } catch (error) {
+    // Network Error (koneksi terputus, server mati)
+    const err = new Error("Koneksi gagal. Periksa jaringan Anda atau server mungkin sedang down.");
+    err.status = 0;
+    throw err;
   }
 
   // Parse response

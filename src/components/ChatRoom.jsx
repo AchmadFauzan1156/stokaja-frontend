@@ -46,11 +46,12 @@ export default function ChatRoom() {
 
     const handleReceive = (newMsg) => {
       // Map manual karena payload dari socket belum tentu terpopulate penuh seperti REST API
+      const safeMessage = typeof newMsg.isiPesan === 'string' ? newMsg.isiPesan : JSON.stringify(newMsg.isiPesan);
       const mappedMsg = {
         id: newMsg._id,
         sender: newMsg.pengirim,
         receiver: newMsg.penerima,
-        message: newMsg.isiPesan,
+        message: safeMessage,
         time: newMsg.createdAt,
       };
       setChats((prev) => [...prev, mappedMsg]);
