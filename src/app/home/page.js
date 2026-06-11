@@ -79,9 +79,9 @@ export default function HomePage() {
   });
 
   return (
-    <div className="h-screen overflow-hidden bg-[#F0E7D6]">
+    <div className="flex flex-col h-screen overflow-hidden bg-[#F0E7D6]">
       {/* ───────── Sticky Top Section ───────── */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-[#F0E7D6] px-4 pt-6 pb-4">
+      <div className="z-50 bg-[#F0E7D6] px-4 pt-6 pb-4 shrink-0">
         {/* Header */}
         <div className="mt-8 mx-4 flex items-center justify-between">
           <div className="flex flex-col">
@@ -114,7 +114,7 @@ export default function HomePage() {
       </div>
 
       {/* ───────── Scrollable Product Area ───────── */}
-      <div className="h-full overflow-y-auto px-4 pb-36 pt-60">
+      <div className="flex-1 overflow-y-auto px-4 pb-36 pt-2">
         {isLoading ? (
           <div className="flex justify-center items-center h-full pt-10">
             <LoadingSpinner size="lg" />
